@@ -20,15 +20,15 @@ import io.parrotsoftware.qatest.data.repositories.impl.UserRepositoryImpl
 
 
 class ListFragment :
-    Fragment(),
-    CategoryListener {
+    Fragment() {
+    //CategoryListener {
 
     private lateinit var viewModel: ListViewModel
     private lateinit var binding: FragmentListBinding
 
-    private val categoryController by lazy {
+    /*private val categoryController by lazy {
         CategoryController(this)
-    }
+    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,28 +41,28 @@ class ListFragment :
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentListBinding.inflate(inflater)
-        binding.lifecycleOwner = this
+        //binding.lifecycleOwner = this
 
-        viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
+        //viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
 
         // TODO Inject
-        viewModel.userRepository = UserRepositoryImpl(
+        /*viewModel.userRepository = UserRepositoryImpl(
             UserManagerImpl(requireContext()),
             NetworkInteractorImpl()
-        )
-        viewModel.productRepository = ProductRepositoryImpl(NetworkInteractorImpl())
+        )*/
+        //viewModel.productRepository = ProductRepositoryImpl(NetworkInteractorImpl())
 
-        binding.viewModel = viewModel
+        //binding.viewModel = viewModel
 
-        lifecycle.addObserver(viewModel)
-        observe(viewModel.getViewState(), ::onViewState)
+        //lifecycle.addObserver(viewModel)
+        //observe(viewModel.getViewState(), ::onViewState)
 
-        binding.recyclerProducts.adapter = categoryController.adapter
-        binding.swipeProducts.setOnRefreshListener { viewModel.fetchProducts() }
+       // binding.recyclerProducts.adapter = categoryController.adapter
+        //binding.swipeProducts.setOnRefreshListener { viewModel.fetchProducts() }
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+   /* override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.initView()
     }
@@ -102,5 +102,5 @@ class ListFragment :
 
     override fun onProductSelected(product: EnabledProduct) {
         viewModel.productSelected(product)
-    }
+    }*/
 }

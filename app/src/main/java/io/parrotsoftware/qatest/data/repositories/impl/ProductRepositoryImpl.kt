@@ -3,9 +3,9 @@ package io.parrotsoftware.qatest.data.repositories.impl
 import io.parrotsoftware.qa_network.domain.requests.ApiUpdateProductRequest
 import io.parrotsoftware.qa_network.domain.responses.ApiProductAvailability
 import io.parrotsoftware.qa_network.interactors.NetworkInteractor
-import io.parrotsoftware.qa_network.services.ParrotApi
 import io.parrotsoftware.qatest.data.domain.Category
 import io.parrotsoftware.qatest.data.domain.Product
+import io.parrotsoftware.qatest.data.domain.RepositoryError
 import io.parrotsoftware.qatest.data.domain.RepositoryResult
 import io.parrotsoftware.qatest.data.repositories.ProductRepository
 
@@ -17,7 +17,7 @@ class ProductRepositoryImpl(
         accessToken: String,
         storeId: String
     ): RepositoryResult<List<Product>> {
-        val response = networkInteractor.safeApiCall {
+       /* val response = networkInteractor.safeApiCall {
             ParrotApi.service.getProducts("Bearer $accessToken", storeId)
         }
 
@@ -38,7 +38,8 @@ class ProductRepositoryImpl(
                 Category(it.category.uuid, it.category.name, it.category.sortPosition)
             )
         }
-        return RepositoryResult(products)
+        return RepositoryResult(products)*/
+        return RepositoryResult()
     }
 
     override suspend fun setProductState(
@@ -46,7 +47,7 @@ class ProductRepositoryImpl(
         productId: String,
         isAvailable: Boolean
     ): RepositoryResult<Nothing> {
-        val body = ApiUpdateProductRequest(
+       /* val body = ApiUpdateProductRequest(
             if (isAvailable) ApiProductAvailability.AVAILABLE
             else ApiProductAvailability.UNAVAILABLE
         )
@@ -63,7 +64,7 @@ class ProductRepositoryImpl(
             return RepositoryResult(
                 errorCode = response.requiredError.requiredErrorCode,
                 errorMessage = response.requiredError.requiredErrorMessage
-            )
+            )*/
 
         return RepositoryResult()
     }

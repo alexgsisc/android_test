@@ -43,9 +43,9 @@ interface ParrotApiService {
     ): ApiSingleResponse<ApiProduct>
 }
 
-object ParrotApi {
+/*object ParrotApi {
 
     val service: ParrotApiService by lazy {
         NetworkBuilder.build(BuildConfig.BASE_URL).create(ParrotApiService::class.java)
     }
-}
+}*/

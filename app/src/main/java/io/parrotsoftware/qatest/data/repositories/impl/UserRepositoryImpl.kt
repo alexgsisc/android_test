@@ -2,20 +2,21 @@ package io.parrotsoftware.qatest.data.repositories.impl
 
 import io.parrotsoftware.qa_network.domain.requests.ApiAuthRequest
 import io.parrotsoftware.qa_network.interactors.NetworkInteractor
-import io.parrotsoftware.qa_network.services.ParrotApi
+import io.parrotsoftware.qatest.data.dataSource.remote.LoginDataSourceNetwork
 import io.parrotsoftware.qatest.data.domain.Credentials
 import io.parrotsoftware.qatest.data.domain.RepositoryResult
 import io.parrotsoftware.qatest.data.domain.Store
 import io.parrotsoftware.qatest.data.managers.UserManager
 import io.parrotsoftware.qatest.data.repositories.UserRepository
+import javax.inject.Inject
 
-class UserRepositoryImpl(
+class UserRepositoryImpl @Inject constructor(
     private val userManager: UserManager,
-    private val networkInteractor: NetworkInteractor
+    private val loginDataSourceNetwork: LoginDataSourceNetwork
 ) : UserRepository {
 
     override suspend fun login(email: String, password: String): RepositoryResult<Nothing> {
-        val responseAuth = networkInteractor.safeApiCall {
+        /*val responseAuth = networkInteractor.safeApiCall {
             ParrotApi.service.auth(ApiAuthRequest(email, password))
         }
         if (responseAuth.isError)
@@ -48,8 +49,8 @@ class UserRepositoryImpl(
         val apiStore = apiUser.stores.first()
 
         userManager.saveCredentials(apiCredentials.accessToken, apiCredentials.refreshToken)
-        userManager.saveStore(apiStore.uuid, apiStore.name)
-
+        userManager.saveStore(apiStore.uuid, apiStore.name)*/
+        loginDataSourceNetwork.login(email, password)
         return RepositoryResult()
     }
 

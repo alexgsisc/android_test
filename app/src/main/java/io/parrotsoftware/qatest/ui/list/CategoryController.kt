@@ -17,15 +17,15 @@ class CategoryController(
 
     override fun buildModels() {
         categories.forEach { category ->
-            itemCategory {
+            /*itemCategory {
                 id(category.category.id)
-                item(category)
+                //item(category)
                 onClick { _: View ->
                     listener.onCategorySelected(category)
                 }
-            }
+            }*/
 
-            if (category.expanded) {
+            /*if (category.expanded) {
                 category.products.forEach { product ->
                     itemProduct {
                         id(product.product.id)
@@ -35,7 +35,7 @@ class CategoryController(
                         }
                     }
                 }
-            }
+            }*/
         }
     }
 }
